@@ -6,7 +6,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,8 +17,7 @@ jobs:
         with:
           images: hildan/mkdocs-material-with-plugins
           tags: |
-            type=sha
-            type=raw,value={{date 'YYYYMMDD'}}
+            type=sha,prefix={{date 'YYYYMMDD'}}-,suffix=
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
